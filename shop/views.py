@@ -18,11 +18,9 @@ class PurchaseCreate(CreateView):
 
     def form_valid(self, form):
         self.object = form.save()
-        if(self.object.birthday == datetime.date):
+        if(self.object.birthday.strftime("%d:%m") == datetime.date(datetime.now()).strftime("%d:%m")):
             return HttpResponse(f'С днем рождения, {self.object.person}! '
                                 f'В качестве подарка, мы сделали Вам скидку в 10%.')
         else:
-            print("ДР ", self.object.birthday)
-            print("ДАТА ", datetime.date)
             return HttpResponse(f'Спасибо за покупку, {self.object.person}!')
 
